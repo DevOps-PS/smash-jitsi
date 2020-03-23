@@ -3,11 +3,12 @@
 class jitsimeet::prosody {
 
   class { 'prosody':
-    user       => 'prosody',
-    group      => 'prosody',
-    admins     => [ "focus@auth.${jitsimeet::fqdn}", ],
-    modules    => [ 'bosh', 'pubsub' ],
-    components => {
+    user              => 'prosody',
+    group             => 'prosody',
+    admins            => [ "focus@auth.${jitsimeet::fqdn}", ],
+    modules           => [ 'bosh', 'pubsub' ],
+    ssl_custom_config => false,
+    components        => {
       'conference'        => {
         'name' => "conference.${jitsimeet::fqdn}",
         'type' =>'muc',
