@@ -38,7 +38,6 @@ class jitsimeet::install {
 
   package {
     [ 'openjdk-11-jre-headless',
-      'prosody',
       'uuid-runtime' ]:
       ensure => present;
   }
