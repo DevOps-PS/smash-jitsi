@@ -1,3 +1,5 @@
+# @summary Manages package installation.
+#
 class jitsimeet::install {
 
 # Debs taken from https://download.jitsi.org/jitsi-videobridge/debian/. I've
@@ -18,13 +20,13 @@ class jitsimeet::install {
 
     file {"/var/cache/apt/archives/${deb}":
       ensure => present,
-      source => "${packages_path}/${deb}",
+      source => "${jitsimeet::packages_path}/${deb}",
       owner  => 'root',
       group  => 'root',
       mode   => '0644';
     }
 
-    package {${package}:
+    package {$package:
       ensure   => present,
       provider => 'dpkg',
       source   => "/var/cache/apt/archives/${deb}",
