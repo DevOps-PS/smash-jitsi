@@ -2,43 +2,46 @@
 #
 class jitsimeet::install {
 
-# Debs taken from https://download.jitsi.org/jitsi-videobridge/debian/. I've
-# manually verified the signatures with the main Jitsi dev key:
-# https://download.jitsi.org/jitsi-key.gpg.key
-#
-# Yes, this sucks.
+  apt::source {
+    'jitsimeet':
+      comment  => 'Jitsi Meet',
+      location => '[signed-by=/usr/share/keyrings/jitsimeet.gpg] https://download.jitsi.org',
+      repos    => '',
+      release  => 'stable/';
+  }
 
-  $debs = [ 'jicofo_1.0-534-1_all.deb',
-            'jitsi-meet-prosody_1.0.3902-1_all.deb',
-            'jitsi-meet-web-config_1.0.3902-1_all.deb',
-            'jitsi-meet_1.0.4301-1_all.deb',
-            'jitsi-meet-web_1.0.3902-1_all.deb',
-            'jitsi-videobridge_1132-1_amd64.deb' ]
+  apt::pin {
+    'jitsimeet':
+      packages   => [ 'jicofo',
+                      'jitsi-meet-prosody',
+                      'jitsi-meet-web-config',
+                      'jitsi-meet',
+                      'jitsi-meet-web',
+                      'jitsi-videobridge' ],
+      priority   => 1000,
+      originator => 'jitsi.org',
+      label      => 'Jitsi Debian packages repository',
+      codename   => 'stable';
 
-  $debs.each |String $deb| {
-    $package = regsubst($deb, '_.+\.deb$', '')
+    'jitsimeet-negative':
+      packages   => '*',
+      priority   => 200,
+      originator => 'jitsi.org',
+      label      => 'Jitsi Debian packages repository',
+      codename   => 'stable';
+  }
 
-    file {"/var/cache/apt/archives/${deb}":
+  file {
+    '/usr/share/keyrings/jitsimeet.gpg':
       ensure => present,
-      source => "${jitsimeet::packages_path}/${deb}",
+      source => $jitsimeet::repo_key,
       owner  => 'root',
       group  => 'root',
       mode   => '0644';
-    }
-
-    package {$package:
-      ensure   => present,
-      provider => 'dpkg',
-      source   => "/var/cache/apt/archives/${deb}",
-      require  => File["/var/cache/apt/archives/${deb}"];
-    }
   }
 
-# Taken from the dependency info in the jitsi packages
-
   package {
-    [ 'openjdk-11-jre-headless',
-      'uuid-runtime' ]:
+    'jitsi-meet':
       ensure => present;
   }
 }
