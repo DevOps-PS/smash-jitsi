@@ -1,0 +1,35 @@
+{
+  "name": "smash-jitsimeet",
+  "version": "0.1.0",
+  "author": "SMASH",
+  "summary": "Installs, configures and manages a Jitsi Meet instance",
+  "license": "GPL-3.0",
+  "source": "https://gitlab.com/shared-puppet-modules-group/jitsimeet",
+  "project_page": "https://gitlab.com/shared-puppet-modules-group/jitsimeet",
+  "issues_url": "https://gitlab.com/shared-puppet-modules-group/jitsimeet/issues",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "10"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+       "version_requirement": ">= 5.5.0"
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "mayflower/prosody",
+      "version_requirement": ">= 0.4.0"
+    },
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 6.2.0"
+    }
+  ],
+  "description": "This module manages and installs a Jitsi Meet instance for you"
+}
