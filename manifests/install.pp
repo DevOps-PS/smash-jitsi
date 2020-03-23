@@ -24,7 +24,7 @@ class jitsimeet::install {
       mode   => '0644';
     }
 
-    package {"${package}":
+    package {${package}:
       ensure   => present,
       provider => 'dpkg',
       source   => "/var/cache/apt/archives/${deb}",

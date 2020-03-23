@@ -21,10 +21,10 @@ class jitsimeet::prosody {
   }
 
   prosody::virtualhost {
-    "${jitsimeet::fqdn}":
+    ${jitsimeet::fqdn}:
       ensure                 => present,
-      ssl_key                => "puppet:///files/jitsimeet/prosody/appel.sogeecom.org.key",
-      ssl_cert               => "puppet:///files/jitsimeet/prosody/appel.sogeecom.org.crt",
+      ssl_key                => $jitsi_virtualhost_ssl_key,
+      ssl_cert               => $jitsi_virtualhost_ssl_cert,
       module_base            => [ 'bosh', 'pubsub' ],
       authentication         => 'anonymous',
       c2s_require_encryption => false,
@@ -33,8 +33,8 @@ class jitsimeet::prosody {
   prosody::virtualhost {
     "auth.${jitsimeet::fqdn}":
       ensure         => present,
-      ssl_key        => "puppet:///files/jitsimeet/prosody/auth.appel.sogeecom.org.key",
-      ssl_cert       => "puppet:///files/jitsimeet/prosody/auth.appel.sogeecom.org.crt",
+      ssl_key        => $auth_virtualhost_ssl_key,
+      ssl_cert       => $auth_virtualhost_ssl_cert,
       authentication => 'internal_plain',
   }
 }
