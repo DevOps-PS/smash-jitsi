@@ -18,7 +18,7 @@ class jitsimeet::install {
 
     file {"/var/cache/apt/archives/${deb}":
       ensure => present,
-      source => "puppet:///files/jitsimeet/packages/${deb}",
+      source => "${packages_path}/${deb}",
       owner  => 'root',
       group  => 'root',
       mode   => '0644';
