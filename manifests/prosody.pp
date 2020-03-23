@@ -3,10 +3,11 @@
 class jitsimeet::prosody {
 
   class { 'prosody':
-    user       => 'prosody',
-    group      => 'prosody',
-    admins     => [ "focus@auth.${jitsimeet::fqdn}", ],
-    components => {
+    user         => 'prosody',
+    group        => 'prosody',
+    admins       => [ "focus@auth.${jitsimeet::fqdn}", ],
+    modules_base => [ 'bosh', 'pubsub' ],
+    components   => {
       'conference'        => {
         'name' => "conference.${jitsimeet::fqdn}",
         'type' =>'muc',
@@ -24,12 +25,13 @@ class jitsimeet::prosody {
 
   prosody::virtualhost {
     $jitsimeet::fqdn:
-      ensure                 => present,
-      ssl_key                => $jitsimeet::jitsi_vhost_ssl_key,
-      ssl_cert               => $jitsimeet::jitsi_vhost_ssl_cert,
-      module_base            => [ 'bosh', 'pubsub' ],
-      authentication         => 'anonymous',
-      c2s_require_encryption => false,
+      ensure         => present,
+      ssl_key        => $jitsimeet::jitsi_vhost_ssl_key,
+      ssl_cert       => $jitsimeet::jitsi_vhost_ssl_cert,
+      custom_options => {
+        'authentication'         => 'anonymous',
+        'c2s_require_encryption' => false,
+      };
   }
 
   prosody::virtualhost {
@@ -37,6 +39,8 @@ class jitsimeet::prosody {
       ensure         => present,
       ssl_key        => $jitsimeet::auth_vhost_ssl_key,
       ssl_cert       => $jitsimeet::auth_vhost_ssl_cert,
-      authentication => 'internal_plain',
+      custom_options => {
+        'authentication' => 'internal_plain',
+      };
   }
 }
