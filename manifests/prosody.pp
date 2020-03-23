@@ -43,4 +43,9 @@ class jitsimeet::prosody {
         'authentication' => 'internal_plain',
       };
   }
+
+  prosody::user { 'focus':
+    host => "auth.${jitsimeet::fqdn}",
+    pass => $jitsimeet::focus_user_password;
+  }
 }

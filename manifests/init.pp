@@ -24,6 +24,9 @@
 # @param focus_secret
 #   The focus component's secret.
 #
+# @param focus_user_password
+#   Password for the focus user.
+#
 class jitsimeet (
   Stdlib::Fqdn  $fqdn,
   String        $packages_path,
@@ -33,6 +36,7 @@ class jitsimeet (
   String        $auth_vhost_ssl_cert,
   String        $jitsi_videobridge_secret,
   String        $focus_secret,
+  String        $focus_user_password,
 ) {
 
   include ::jitsimeet::install
