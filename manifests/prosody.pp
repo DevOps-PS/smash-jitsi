@@ -6,19 +6,18 @@ class jitsimeet::prosody {
     user              => 'prosody',
     group             => 'prosody',
     admins            => [ "focus@auth.${jitsimeet::fqdn}", ],
-    modules           => [ 'bosh', 'pubsub' ],
     ssl_custom_config => false,
     components        => {
-      'conference'        => {
-        'name' => "conference.${jitsimeet::fqdn}",
-        'type' =>'muc',
+      "conference.${jitsimeet::fqdn}" => {
+        'type'    =>'muc',
+        'options' => {
+          'storage' => 'memory',
+        },
       },
-      'jvb' => {
-        'name'   => "jvb.${jitsimeet::fqdn}",
+      "jvb.${jitsimeet::fqdn}"        => {
         'secret' =>  $jitsimeet::jvb_secret,
       },
-      'focus'             => {
-        'name'   => "focus.${jitsimeet::fqdn}",
+      "focus.${jitsimeet::fqdn}"      => {
         'secret' =>  $jitsimeet::focus_secret,
       },
     }
@@ -32,6 +31,7 @@ class jitsimeet::prosody {
       custom_options => {
         'authentication'         => 'anonymous',
         'c2s_require_encryption' => false,
+        'modules_enabled'        => [ 'bosh', 'pubsub', 'ping' ],
       };
   }
 
