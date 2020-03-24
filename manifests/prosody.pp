@@ -3,11 +3,18 @@
 class jitsimeet::prosody {
 
   class { 'prosody':
-    user              => 'prosody',
-    group             => 'prosody',
-    admins            => [ "focus@auth.${jitsimeet::fqdn}", ],
-    ssl_custom_config => false,
-    components        => {
+    user                   => 'prosody',
+    group                  => 'prosody',
+    admins                 => [ "focus@auth.${jitsimeet::fqdn}", ],
+    ssl_custom_config      => false,
+    c2s_require_encryption => false,
+    s2s_require_encryption => false,
+    s2s_secure_auth        => false,
+    daemonize              => false,
+    custom_options         => {
+      'https_ports' => '{}',
+    },
+    components             => {
       "conference.${jitsimeet::fqdn}" => {
         'type'    =>'muc',
         'options' => {
