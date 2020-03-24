@@ -42,4 +42,5 @@ class jitsimeet (
 
   include ::jitsimeet::install
   include ::jitsimeet::prosody
+  include ::jitsimeet::services
 }
