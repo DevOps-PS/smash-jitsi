@@ -11,7 +11,7 @@ class jitsimeet::config {
       }),
       owner   => 'root',
       group   => 'jitsi',
-      mode    => '0640';
+      mode    => '0644';
 
     '/etc/jitsi/jicofo/config':
       ensure  => present,
