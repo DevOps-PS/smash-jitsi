@@ -15,7 +15,7 @@ class jitsimeet::prosody {
       },
       'jitsi-videobridge' => {
         'name'   => "jitsi-videobridge.${jitsimeet::fqdn}",
-        'secret' =>  $jitsimeet::jitsi_videobridge_secret,
+        'secret' =>  $jitsimeet::jvb_secret,
       },
       'focus'             => {
         'name'   => "focus.${jitsimeet::fqdn}",
