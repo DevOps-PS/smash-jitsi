@@ -19,7 +19,7 @@
 # @param auth_vhost_ssl_cert
 #   Path to the authentication virtualhost ssl certificate.
 #
-# @param jitsi_videobridge_secret
+# @param jvb_secret
 #   The jitsi-videobridge component's secret.
 #
 # @param focus_secret
@@ -28,6 +28,9 @@
 # @param focus_user_password
 #   Password for the focus user.
 #
+# @param meet_custom_options
+#   Custom options to be passed to the main jitsi configuration file.
+#
 class jitsimeet (
   Stdlib::Fqdn  $fqdn,
   String        $repo_key,
@@ -35,11 +38,13 @@ class jitsimeet (
   String        $jitsi_vhost_ssl_cert,
   String        $auth_vhost_ssl_key,
   String        $auth_vhost_ssl_cert,
-  String        $jitsi_videobridge_secret,
+  String        $jvb_secret,
   String        $focus_secret,
   String        $focus_user_password,
+  Hash          $meet_custom_options,
 ) {
 
+  include ::jitsimeet::config
   include ::jitsimeet::install
   include ::jitsimeet::prosody
   include ::jitsimeet::services

@@ -1,0 +1,21 @@
+//
+// THIS FILE IS MANAGED BY PUPPET
+//
+
+var config = {
+
+    hosts: {
+        domain: '<%= $fqdn %>',
+        focus: 'focus.<%= $fqdn %>',
+        muc: 'conference.<%= $fqdn %>',
+        bridge: 'jitsi-videobridge.<%= $fqdn %>'
+    },
+
+    bosh: '//<%= $fqdn %>/http-bind',
+    clientNode: 'http://jitsi.org/jitsimeet',
+    focusUserJid: 'focus@auth.<%= $fqdn %>',
+    useNicks: false,
+<% $custom_options.each |$key, $value| { -%>
+    '<%= $key %>': '<%= $value %>',
+<% } -%>
+};
