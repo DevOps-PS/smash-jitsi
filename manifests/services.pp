@@ -3,8 +3,7 @@
 class jitsimeet::services {
 
   $services = [ 'jitsi-videobridge',
-                'jicofo',
-                'jvb' ]
+                'jicofo' ]
 
   $services.each |String $service| {
     service { $service:
