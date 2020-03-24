@@ -22,7 +22,8 @@ class jitsimeet::config {
       }),
       owner   => 'jicofo',
       group   => 'jitsi',
-      mode    => '0640';
+      mode    => '0640'
+      notify  => Service['jicofo'];
 
     '/etc/jitsi/videobridge/config':
       ensure  => present,
@@ -32,6 +33,7 @@ class jitsimeet::config {
       }),
       owner   => 'jvb',
       group   => 'jitsi',
-      mode    => '0640';
+      mode    => '0640',
+      notify  => Service['jitsi-videobridge'];
   }
 }
