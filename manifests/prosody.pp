@@ -13,8 +13,8 @@ class jitsimeet::prosody {
         'name' => "conference.${jitsimeet::fqdn}",
         'type' =>'muc',
       },
-      'jitsi-videobridge' => {
-        'name'   => "jitsi-videobridge.${jitsimeet::fqdn}",
+      'jvb' => {
+        'name'   => "jvb.${jitsimeet::fqdn}",
         'secret' =>  $jitsimeet::jvb_secret,
       },
       'focus'             => {
