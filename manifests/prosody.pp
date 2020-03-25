@@ -18,7 +18,7 @@ class jitsimeet::prosody {
       "conference.${jitsimeet::fqdn}" => {
         'type'    =>'muc',
         'options' => {
-          'storage' => 'memory',
+          'storage' => '"memory"',
         },
       },
       "jvb.${jitsimeet::fqdn}"        => {
