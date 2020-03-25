@@ -6,8 +6,9 @@
 2. [Setup](#setup)
     * [Setup requirements](#setup-requirements)
     * [Getting started](#getting-started)
-3. [Reference](#reference)
-4. [Development](#development)
+3. [Limitations](#limitations)
+4. [Reference](#reference)
+5. [Development](#development)
 
 ## Description
 
@@ -38,6 +39,19 @@ Here is an example of a working configuration:
     focus_secret             => 'anothersupersecretstring',
   }
 ```
+
+## Limitations
+
+This module is still very young and lacks a bunch of features. Please use it at
+your own risk (and don't be afraid to send a path!).
+
+At the moment, the following things aren't managed by this module:
+
+* webserver (nginx, apache2) configuration
+* prosody TLS certificates
+* unattended-updates configuration
+
+For now, only Debian 10 is supported.
 
 # Reference
 
