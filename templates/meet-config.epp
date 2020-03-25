@@ -15,6 +15,24 @@ var config = {
     clientNode: 'http://jitsi.org/jitsimeet',
     focusUserJid: 'focus@auth.<%= $fqdn %>',
     useNicks: false,
+    testing: {
+        enableFirefoxSimulcast: false,
+        p2pTestMode: false
+    },
+    desktopSharingChromeExtId: null,
+    desktopSharingChromeSources: [ 'screen', 'window', 'tab' ],
+    desktopSharingChromeMinExtVersion: '0.1',
+    channelLastN: -1,
+    enableUserRolesBasedOnToken: false,
+    p2p: {
+        enabled: true,
+        stunServers: [
+            { urls: 'stun:stun.l.google.com:19302' },
+            { urls: 'stun:stun1.l.google.com:19302' },
+            { urls: 'stun:stun2.l.google.com:19302' }
+        ],
+        preferH264: true
+    },
 <% $custom_options.each |$key, $value| { -%>
     <%= $key %>: '<%= $value %>',
 <% } -%>
