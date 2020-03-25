@@ -3,7 +3,7 @@
 class jitsimeet::config {
 
   file {
-    '/etc/jitsi/meet/config.js':
+    "/etc/jitsi/meet/${jitsimeet::fqdn}-config.js":
       ensure  => present,
       content => epp('jitsimeet/meet-config.epp', {
         'fqdn'           => $jitsimeet::fqdn,
