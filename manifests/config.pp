@@ -36,4 +36,39 @@ class jitsimeet::config {
       mode    => '0640',
       notify  => Service['jitsi-videobridge'];
   }
+
+  if $jitsi::manage_fqdn_cert {
+    $fqdn_cert = [ $jitsimeet::fqdn ]
+  } else {
+    $fqdn_cert = []
+  }
+
+  if $jitsi::manage_misc_certs {
+    $misc_cert = [ "auth.${jitsimeet::fqdn}",
+                  "conference.${jitsimeet::fqdn}",
+                  "focus.${jitsimeet::fqdn}",
+                  "jvb.${jitsimeet::fqdn}" ]
+  } else {
+    $misc_cert = []
+  }
+
+  if $jitsi::manage_misc_certs or $jitsi::manage_fqdn_cert {
+    $certificates = $fqdn_cert + $misc_cert
+    $certificates.each |Stdlib::FQDN $cert| {
+      letsencrypt::certonly { $cert }
+      file {
+        default:
+          ensure  => file,
+          owner   => 'prosody',
+          group   => 'prosody',
+          mode    => '0400',
+          notify  => Service['prosody'],
+          require => Letsencrypt[$cert];
+        "/etc/prosody/certs/${cert}.key":
+          source => "/etc/letsencrypt/live/${cert}/privkey.pem";
+        "/etc/prosody/certs/${cert}.crt":
+          source => "/etc/letsencrypt/live/${cert}/cert.pem";
+      }
+    }
+  }
 }
