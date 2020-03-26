@@ -60,7 +60,7 @@ class jitsimeet::prosody {
 
   exec {
     'update-ca-certificates':
-      command     => 'update-ca-certificates -f',
+      command     => '/usr/sbin/update-ca-certificates -f',
       refreshonly => true;
   }
 
@@ -69,7 +69,7 @@ class jitsimeet::prosody {
       default:
         ensure => link,
         force  => true,
-        notify => Exec['update-ca-certificates'],
+        notify => Exec['update-ca-certificates'];
       "/usr/local/share/ca-certificates/${cert}.key":
         target => "/etc/prosody/certs/${cert}.key";
       "/usr/local/share/ca-certificates/${cert}.crt":

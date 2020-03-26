@@ -46,7 +46,7 @@ class jitsimeet (
   Stdlib::Fqdn        $fqdn,
   String              $repo_key,
   Boolean             $manage_certs,
-  Array[Stdlib::Fqdn] $certificates,
+  Array[Stdlib::Fqdn] $certificates = [ $fqdn, "auth.${fqdn}" ],
   String              $jitsi_vhost_ssl_key,
   String              $jitsi_vhost_ssl_cert,
   String              $auth_vhost_ssl_key,

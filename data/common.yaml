@@ -1,7 +1,4 @@
 ---
 jitsimeet::manage_certs: false
 jitsimeet::jvb_max_memory: 3072
-jitsimeet::certificates:
-  - %{::jitsimeet::fqdn}
-  - auth.%{::jitsimeet::fqdn}
 ...
