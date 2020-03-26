@@ -63,7 +63,7 @@ class jitsimeet::config {
           group   => 'prosody',
           mode    => '0400',
           notify  => Service['prosody'],
-          require => Letsencrypt[$cert];
+          require => Letsencrypt::Certonly[$cert];
         "/etc/prosody/certs/${cert}.key":
           source => "/etc/letsencrypt/live/${cert}/privkey.pem";
         "/etc/prosody/certs/${cert}.crt":
