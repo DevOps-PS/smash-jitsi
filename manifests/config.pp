@@ -47,7 +47,7 @@ class jitsimeet::config {
     $misc_cert = [ "auth.${jitsimeet::fqdn}",
                   "conference.${jitsimeet::fqdn}",
                   "focus.${jitsimeet::fqdn}",
-                  "jvb.${jitsimeet::fqdn}" ]
+                  "jitsi-videobridge.${jitsimeet::fqdn}" ]
   } else {
     $misc_cert = []
   }

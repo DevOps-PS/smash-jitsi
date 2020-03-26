@@ -15,16 +15,16 @@ class jitsimeet::prosody {
       'https_ports' => '{}',
     },
     components             => {
-      "conference.${jitsimeet::fqdn}" => {
+      "conference.${jitsimeet::fqdn}"        => {
         'type'    =>'muc',
         'options' => {
           'storage' => '"memory"',
         },
       },
-      "jvb.${jitsimeet::fqdn}"        => {
+      "jitsi-videobridge.${jitsimeet::fqdn}" => {
         'secret' =>  $jitsimeet::jvb_secret,
       },
-      "focus.${jitsimeet::fqdn}"      => {
+      "focus.${jitsimeet::fqdn}"             => {
         'secret' =>  $jitsimeet::focus_secret,
       },
     }

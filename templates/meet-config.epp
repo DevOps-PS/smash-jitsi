@@ -8,7 +8,7 @@ var config = {
         domain: '<%= $fqdn %>',
         focus: 'focus.<%= $fqdn %>',
         muc: 'conference.<%= $fqdn %>',
-        bridge: 'jvb.<%= $fqdn %>'
+        bridge: 'jitsi-videobridge.<%= $fqdn %>'
     },
 
     bosh: '//<%= $fqdn %>/http-bind',

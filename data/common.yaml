@@ -1,6 +1,4 @@
 ---
 jitsimeet::manage_fqdn_cert: false
-jitsimeet::manage_misc_certs: true
-jitsimeet::auth_vhost_ssl_key: /etc/letsencrypt/live/auth.%{::jitsimeet::fqdn}/privkey.pem
-jitsimeet::auth_vhost_ssl_cert: /etc/letsencrypt/live/auth.%{::jitsimeet::fqdn}/cert.pem
+jitsimeet::manage_misc_certs: false
 ...
