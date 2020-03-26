@@ -64,16 +64,14 @@ class jitsimeet::prosody {
       refreshonly => true;
   }
 
-  $jitsimeet::certificates.each |Stdlib::FQDN $cert| {
-    file {
-      default:
-        ensure => link,
-        force  => true,
-        notify => Exec['update-ca-certificates'];
-      "/usr/local/share/ca-certificates/${cert}.key":
-        target => "/etc/prosody/certs/${cert}.key";
-      "/usr/local/share/ca-certificates/${cert}.crt":
-        target => "/etc/prosody/certs/${cert}.crt";
-    }
+  file {
+    default:
+      ensure => link,
+      force  => true,
+      notify => Exec['update-ca-certificates'];
+    "/usr/local/share/ca-certificates/auth.${jitsimeet::fqdn}.key":
+      target => "/etc/prosody/certs/auth.${jitsimeet::fqdn}.key";
+    "/usr/local/share/ca-certificates/auth.${jitsimeet::fqdn}.crt":
+      target => "/etc/prosody/certs/auth.${jitsimeet::fqdn}.crt";
   }
 }
