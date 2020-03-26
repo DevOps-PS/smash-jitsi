@@ -7,13 +7,9 @@
 #   Path to the _dearmored_ jitsi meet Debian repository GPG key.
 #   Fingerprint should match 66A9 CD05 95D6 AFA 2472  90D3 BEF8 B479 E2DC 1389C
 #
-# @param manage_fqdn_cert
-#   If the TLS certificate for the FQDN of the jitsi instance should be managed
-#   using Let's Encrypt.
-#
-# @param manage_misc_certs
-#   If the TLS certificates for the other domains needed (auth.FQDN, focus.FQDN, etc.)
-#   should be managed using Let's Encrypt.
+# @param manage_certs
+#   If the TLS certificates for FQDN and auth.FQDN should be managed using
+#   Let's Encrypt. This requires a valid DNS entry for those domains.
 #
 # @param jitsi_vhost_ssl_key
 #   Path to the jitsi virtualhost ssl key.
@@ -45,8 +41,7 @@
 class jitsimeet (
   Stdlib::Fqdn  $fqdn,
   String        $repo_key,
-  Boolean       $manage_fqdn_cert,
-  Boolean       $manage_misc_certs,
+  Boolean       $manage_certs,
   String        $jitsi_vhost_ssl_key,
   String        $jitsi_vhost_ssl_cert,
   String        $auth_vhost_ssl_key,

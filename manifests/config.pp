@@ -47,41 +47,12 @@ class jitsimeet::config {
       notify  => Service['jitsi-videobridge'];
   }
 
-  if $jitsimeet::manage_fqdn_cert {
-    $fqdn_cert = [ $jitsimeet::fqdn ]
-  } else {
-    $fqdn_cert = []
-  }
+  if $jitsimeet::manage_certs {
+    $certificates = [ $jitsimeet::fqdn, "auth.${jitsimeet::fqdn}" ]
 
-  if $jitsimeet::manage_misc_certs {
-    $misc_cert = [ "auth.${jitsimeet::fqdn}",
-                  "conference.${jitsimeet::fqdn}",
-                  "focus.${jitsimeet::fqdn}",
-                  "jitsi-videobridge.${jitsimeet::fqdn}" ]
-  } else {
-    $misc_cert = []
-  }
-
-  if $jitsimeet::manage_misc_certs or $jitsimeet::manage_fqdn_cert {
-    $certificates = $fqdn_cert + $misc_cert
+    # Files are pushed by the prosody module
     $certificates.each |Stdlib::FQDN $cert| {
       letsencrypt::certonly { $cert: }
-
-      if $cert != "auth.${jitsimeet::fqdn}" { #this cert is already managed in prosody
-        file {
-          default:
-            ensure  => file,
-            owner   => 'prosody',
-            group   => 'prosody',
-            mode    => '0400',
-            links   => follow,
-            require => Letsencrypt::Certonly[$cert];
-          "/etc/prosody/certs/${cert}.key":
-            source => "/etc/letsencrypt/live/${cert}/privkey.pem";
-          "/etc/prosody/certs/${cert}.crt":
-            source => "/etc/letsencrypt/live/${cert}/cert.pem";
-        }
-      }
     }
   }
 }
