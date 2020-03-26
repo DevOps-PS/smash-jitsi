@@ -56,17 +56,20 @@ class jitsimeet::config {
     $certificates = $fqdn_cert + $misc_cert
     $certificates.each |Stdlib::FQDN $cert| {
       letsencrypt::certonly { $cert: }
-      file {
-        default:
-          ensure  => file,
-          owner   => 'prosody',
-          group   => 'prosody',
-          mode    => '0400',
-          require => Letsencrypt::Certonly[$cert];
-        "/etc/prosody/certs/${cert}.key":
-          source => "/etc/letsencrypt/live/${cert}/privkey.pem";
-        "/etc/prosody/certs/${cert}.crt":
-          source => "/etc/letsencrypt/live/${cert}/cert.pem";
+
+      if $cert != "auth.${jitsimeet::fqdn}" { #this cert is already managed in prosody
+        file {
+          default:
+            ensure  => file,
+            owner   => 'prosody',
+            group   => 'prosody',
+            mode    => '0400',
+            require => Letsencrypt::Certonly[$cert];
+          "/etc/prosody/certs/${cert}.key":
+            source => "/etc/letsencrypt/live/${cert}/privkey.pem";
+          "/etc/prosody/certs/${cert}.crt":
+            source => "/etc/letsencrypt/live/${cert}/cert.pem";
+        }
       }
     }
   }
