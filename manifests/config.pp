@@ -64,6 +64,7 @@ class jitsimeet::config {
             owner   => 'prosody',
             group   => 'prosody',
             mode    => '0400',
+            links   => follow,
             require => Letsencrypt::Certonly[$cert];
           "/etc/prosody/certs/${cert}.key":
             source => "/etc/letsencrypt/live/${cert}/privkey.pem";
