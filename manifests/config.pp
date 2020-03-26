@@ -35,6 +35,16 @@ class jitsimeet::config {
       group   => 'jitsi',
       mode    => '0640',
       notify  => Service['jitsi-videobridge'];
+
+    '/usr/share/jitsi-videobridge/lib/videobridge.rc':
+      ensure  => present,
+      content => epp('jitsimeet/videobridge.rc.epp', {
+        'jvb_max_memory' => $jitsimeet::jvb_max_memory,
+      }),
+      owner   => 'jvb',
+      group   => 'jitsi',
+      mode    => '0640',
+      notify  => Service['jitsi-videobridge'];
   }
 
   if $jitsimeet::manage_fqdn_cert {

@@ -1,4 +1,5 @@
 ---
 jitsimeet::manage_fqdn_cert: false
 jitsimeet::manage_misc_certs: false
+jitsimeet::jvb_max_memory: 3072
 ...

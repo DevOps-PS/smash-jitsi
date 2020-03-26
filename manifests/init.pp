@@ -30,6 +30,9 @@
 # @param jvb_secret
 #   The jitsi-videobridge component's secret.
 #
+# @param jvb_max_memory
+#   The maximum memory in megabytes the jvb java process can consume.
+#
 # @param focus_secret
 #   The focus component's secret.
 #
@@ -49,6 +52,7 @@ class jitsimeet (
   String        $auth_vhost_ssl_key,
   String        $auth_vhost_ssl_cert,
   String        $jvb_secret,
+  Integer       $jvb_max_memory,
   String        $focus_secret,
   String        $focus_user_password,
   Hash          $meet_custom_options,
