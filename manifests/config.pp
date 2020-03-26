@@ -37,13 +37,13 @@ class jitsimeet::config {
       notify  => Service['jitsi-videobridge'];
   }
 
-  if $jitsi::manage_fqdn_cert {
+  if $jitsimeet::manage_fqdn_cert {
     $fqdn_cert = [ $jitsimeet::fqdn ]
   } else {
     $fqdn_cert = []
   }
 
-  if $jitsi::manage_misc_certs {
+  if $jitsimeet::manage_misc_certs {
     $misc_cert = [ "auth.${jitsimeet::fqdn}",
                   "conference.${jitsimeet::fqdn}",
                   "focus.${jitsimeet::fqdn}",
@@ -52,10 +52,10 @@ class jitsimeet::config {
     $misc_cert = []
   }
 
-  if $jitsi::manage_misc_certs or $jitsi::manage_fqdn_cert {
+  if $jitsimeet::manage_misc_certs or $jitsimeet::manage_fqdn_cert {
     $certificates = $fqdn_cert + $misc_cert
     $certificates.each |Stdlib::FQDN $cert| {
-      letsencrypt::certonly { $cert }
+      letsencrypt::certonly { $cert: }
       file {
         default:
           ensure  => file,
