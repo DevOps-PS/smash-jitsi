@@ -48,10 +48,8 @@ class jitsimeet::config {
   }
 
   if $jitsimeet::manage_certs {
-    $certificates = [ $jitsimeet::fqdn, "auth.${jitsimeet::fqdn}" ]
-
     # Files are pushed by the prosody module
-    $certificates.each |Stdlib::FQDN $cert| {
+    $jitsimeet::certificates.each |Stdlib::FQDN $cert| {
       letsencrypt::certonly { $cert: }
     }
   }

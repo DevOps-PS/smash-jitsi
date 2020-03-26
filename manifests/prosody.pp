@@ -57,4 +57,23 @@ class jitsimeet::prosody {
     host => "auth.${jitsimeet::fqdn}",
     pass => $jitsimeet::focus_user_password;
   }
+
+  exec {
+    'update-ca-certificates':
+      command     => 'update-ca-certificates -f',
+      refreshonly => true;
+  }
+
+  $jitsimeet::certificates.each |Stdlib::FQDN $cert| {
+    file {
+      default:
+        ensure => link,
+        force  => true,
+        notify => Exec['update-ca-certificates'],
+      "/usr/local/share/ca-certificates/${cert}.key":
+        target => "/etc/prosody/certs/${cert}.key";
+      "/usr/local/share/ca-certificates/${cert}.crt":
+        target => "/etc/prosody/certs/${cert}.crt";
+    }
+  }
 }

@@ -7,6 +7,10 @@
 #   Path to the _dearmored_ jitsi meet Debian repository GPG key.
 #   Fingerprint should match 66A9 CD05 95D6 AFA 2472  90D3 BEF8 B479 E2DC 1389C
 #
+# @param certificates
+#   The certificates puppet has to manage for prosody. Typically, you should not
+#   have to touch this value, as the default is sane.
+#
 # @param manage_certs
 #   If the TLS certificates for FQDN and auth.FQDN should be managed using
 #   Let's Encrypt. This requires a valid DNS entry for those domains.
@@ -39,18 +43,19 @@
 #   Custom options to be passed to the main jitsi configuration file.
 #
 class jitsimeet (
-  Stdlib::Fqdn  $fqdn,
-  String        $repo_key,
-  Boolean       $manage_certs,
-  String        $jitsi_vhost_ssl_key,
-  String        $jitsi_vhost_ssl_cert,
-  String        $auth_vhost_ssl_key,
-  String        $auth_vhost_ssl_cert,
-  String        $jvb_secret,
-  Integer       $jvb_max_memory,
-  String        $focus_secret,
-  String        $focus_user_password,
-  Hash          $meet_custom_options,
+  Stdlib::Fqdn        $fqdn,
+  String              $repo_key,
+  Boolean             $manage_certs,
+  Array[Stdlib::Fqdn] $certificates,
+  String              $jitsi_vhost_ssl_key,
+  String              $jitsi_vhost_ssl_cert,
+  String              $auth_vhost_ssl_key,
+  String              $auth_vhost_ssl_cert,
+  String              $jvb_secret,
+  Integer             $jvb_max_memory,
+  String              $focus_secret,
+  String              $focus_user_password,
+  Hash                $meet_custom_options,
 ) {
 
   include ::jitsimeet::config
