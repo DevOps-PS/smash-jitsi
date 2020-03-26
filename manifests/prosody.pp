@@ -12,7 +12,8 @@ class jitsimeet::prosody {
     s2s_secure_auth        => false,
     daemonize              => false,
     custom_options         => {
-      'https_ports' => '{}',
+      'https_ports'  => '{}',
+      'certificates' => '"certs"',
     },
     components             => {
       "conference.${jitsimeet::fqdn}"        => {
