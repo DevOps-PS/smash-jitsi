@@ -27,9 +27,13 @@
       "version_requirement": ">= 0.4.0"
     },
     {
+      "name": "puppet/letsencrypt",
+      "version_requirement": ">= 5.0.0"
+    },
+    {
       "name": "puppetlabs/stdlib",
       "version_requirement": ">= 6.2.0"
     }
   ],
-  "description": "This module manages and installs a Jitsi Meet instance for you"
+  "description": "This module manages and installs a Jitsi Meet instance."
 }

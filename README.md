@@ -25,6 +25,10 @@ This module needs:
  * the [stdlib module](https://github.com/puppetlabs/puppetlabs-stdlib.git)
  * the [prosody module](https://github.com/voxpupuli/puppet-prosody.git)
 
+The following modules may also be required, depending on the options you use:
+
+ * the [let's encrypt module](https://github.com/voxpupuli/puppet-letsencrypt.git)
+
 Explicit dependencies can be found in the project's metadata.json file.
 
 ### Getting started
@@ -34,21 +38,31 @@ Here is an example of a working configuration:
 
 ``` puppet
   class { 'jitsimeet':
-    fqdn                     => 'jitsi.example.com',
-    jitsi_videobridge_secret => 'mysupersecretstring',
-    focus_secret             => 'anothersupersecretstring',
+    fqdn                 => 'jitsi.example.com',
+    repo_key             => puppet:///files/apt/jitsimeet.gpg,
+    manage_certs         => true,
+    jitsi_vhost_ssl_key  => '/etc/letsencrypt/live/jitsi.example.com/privkey.pem'
+    jitsi_vhost_ssl_cert => '/etc/letsencrypt/live/jitsi.example.com/cert.pem'
+    auth_vhost_ssl_key   => '/etc/letsencrypt/live/auth.jitsi.example.com/privkey.pem'
+    auth_vhost_ssl_cert  => '/etc/letsencrypt/live/auth.jitsi.example.com/cert.pem'
+    jvb_secret           => 'mysupersecretstring',
+    focus_secret         => 'anothersupersecretstring',
+    focus_user_password  => 'yetanothersecret',
+    meet_custom_options  => {
+      'enableWelcomePage'         => true,
+      'disableThirdPartyRequests' => true,
+    };
   }
 ```
 
 ## Limitations
 
 This module is still very young and lacks a bunch of features. Please use it at
-your own risk (and don't be afraid to send a path!).
+your own risk (and don't be afraid to send a patch!).
 
 At the moment, the following things aren't managed by this module:
 
 * webserver (nginx, apache2) configuration
-* prosody TLS certificates
 * unattended-updates configuration
 
 For now, only Debian 10 is supported.
