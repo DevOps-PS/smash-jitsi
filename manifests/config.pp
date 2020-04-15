@@ -34,7 +34,7 @@ class jitsimeet::config {
       owner   => 'jvb',
       group   => 'jitsi',
       mode    => '0640',
-      notify  => Service['jitsi-videobridge'];
+      notify  => Service['jitsi-videobridge2'];
 
     '/usr/share/jitsi-videobridge/lib/videobridge.rc':
       ensure  => present,
@@ -44,7 +44,7 @@ class jitsimeet::config {
       owner   => 'jvb',
       group   => 'jitsi',
       mode    => '0640',
-      notify  => Service['jitsi-videobridge'];
+      notify  => Service['jitsi-videobridge2'];
   }
 
   if $jitsimeet::manage_certs {
