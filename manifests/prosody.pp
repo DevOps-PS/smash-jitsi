@@ -5,7 +5,6 @@ class jitsimeet::prosody {
   class { 'prosody':
     user                   => 'prosody',
     group                  => 'prosody',
-    community_modules      => [ '/usr/share/jitsi-meet/prosody-plugins/', ],
     admins                 => [ "focus@auth.${jitsimeet::fqdn}", ],
     ssl_custom_config      => false,
     c2s_require_encryption => false,
