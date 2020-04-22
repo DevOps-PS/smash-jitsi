@@ -53,6 +53,7 @@ class jitsimeet (
   Hash                $meet_custom_options,
   String	      $jwt_app_id,
   String	      $jwt_app_secret,
+  String              $domain_name,
 ) {
 
   include ::jitsimeet::config

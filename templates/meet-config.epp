@@ -11,7 +11,7 @@ var config = {
         bridge: 'jitsi-videobridge.<%= $fqdn %>'
     },
 
-    bosh: '//<%= $fqdn %>:8443/http-bind',
+    bosh: '//<%= $domain_name %>/http-bind',
     clientNode: 'http://jitsi.org/jitsimeet',
     focusUserJid: 'focus@auth.<%= $fqdn %>',
     useNicks: false,
