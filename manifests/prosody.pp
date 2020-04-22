@@ -30,6 +30,7 @@ class jitsimeet::prosody {
         'secret' =>  $jitsimeet::focus_secret,
       },
       "internal.auth.${jitsimeet::fqdn}"     => {
+        'type'    =>'muc',
         'options' => {
           'storage'         => '"memory"',
         },
