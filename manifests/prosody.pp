@@ -5,6 +5,7 @@ class jitsimeet::prosody {
   class { 'prosody':
     user                   => 'prosody',
     group                  => 'prosody',
+    community_modules      => '/usr/share/jitsi-meet/prosody-plugins/',
     admins                 => [ "focus@auth.${jitsimeet::fqdn}", ],
     ssl_custom_config      => false,
     c2s_require_encryption => false,
@@ -19,7 +20,8 @@ class jitsimeet::prosody {
       "conference.${jitsimeet::fqdn}"        => {
         'type'    =>'muc',
         'options' => {
-          'storage' => '"memory"',
+          'storage'         => '"memory"',
+          'modules_enabled' => '{ "token_verification" }',
         },
       },
       "jitsi-videobridge.${jitsimeet::fqdn}" => {
@@ -27,6 +29,11 @@ class jitsimeet::prosody {
       },
       "focus.${jitsimeet::fqdn}"             => {
         'secret' =>  $jitsimeet::focus_secret,
+      },
+      "internal.auth.${jitsimeet::fqdn}"     => {
+        'options' => {
+          'storage'         => '"memory"',
+        },
       },
     }
   }
@@ -37,9 +44,12 @@ class jitsimeet::prosody {
       ssl_key        => $jitsimeet::jitsi_vhost_ssl_key,
       ssl_cert       => $jitsimeet::jitsi_vhost_ssl_cert,
       custom_options => {
-        'authentication'         => 'anonymous',
+        'authentication'         => 'token',
         'c2s_require_encryption' => false,
         'modules_enabled'        => [ 'bosh', 'pubsub', 'ping' ],
+        'app_id'                 => $jitsimeet::jwt_app_id,
+        'app_secret'             => $jitsimeet::jwt_app_secret,
+        'allow_empty_token'      => false,
       };
   }
 

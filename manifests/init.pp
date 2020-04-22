@@ -51,6 +51,8 @@ class jitsimeet (
   String              $focus_secret,
   String              $focus_user_password,
   Hash                $meet_custom_options,
+  String	      $jwt_app_id,
+  String	      $jwt_app_secret,
 ) {
 
   include ::jitsimeet::config
