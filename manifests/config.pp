@@ -8,6 +8,7 @@ class jitsimeet::config {
       content => epp('jitsimeet/meet-config.epp', {
         'fqdn'           => $jitsimeet::fqdn,
         'custom_options' => $jitsimeet::meet_custom_options,
+        'domain_name'    => $jitsimeet::domain_name,
       }),
       owner   => 'root',
       group   => 'jitsi',
