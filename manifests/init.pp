@@ -58,5 +58,6 @@ class jitsimeet (
 
   include ::jitsimeet::config
   include ::jitsimeet::install
+  include ::jitsimeet::prosody
   include ::jitsimeet::services
 }
