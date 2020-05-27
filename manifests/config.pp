@@ -20,6 +20,7 @@ class jitsimeet::config {
         'fqdn'                => $jitsimeet::fqdn,
         'focus_secret'        => $jitsimeet::focus_secret,
         'focus_user_password' => $jitsimeet::focus_user_password,
+        'domain_name'         => $jitsimeet::domain_name,
       }),
       owner   => 'jicofo',
       group   => 'jitsi',
@@ -29,8 +30,9 @@ class jitsimeet::config {
     '/etc/jitsi/videobridge/config':
       ensure  => present,
       content => epp('jitsimeet/jvb-config.epp', {
-        'fqdn'       => $jitsimeet::fqdn,
-        'jvb_secret' => $jitsimeet::jvb_secret,
+        'fqdn'        => $jitsimeet::fqdn,
+        'jvb_secret'  => $jitsimeet::jvb_secret,
+        'domain_name' => $jitsimeet::domain_name,
       }),
       owner   => 'jvb',
       group   => 'jitsi',
