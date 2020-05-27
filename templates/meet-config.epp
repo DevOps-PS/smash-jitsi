@@ -5,15 +5,15 @@
 var config = {
 
     hosts: {
-        domain: '<%= $fqdn %>',
-        focus: 'focus.<%= $fqdn %>',
-        muc: 'conference.<%= $fqdn %>',
-        bridge: 'jitsi-videobridge.<%= $fqdn %>'
+        domain: '<%= $domain_name %>',
+        focus: 'focus.<%= $domain_name %>',
+        muc: 'conference.<%= $domain_name %>',
+        bridge: 'jitsi-videobridge.<%= $domain_name %>'
     },
 
     bosh: '//<%= $domain_name %>/http-bind',
     clientNode: 'http://jitsi.org/jitsimeet',
-    focusUserJid: 'focus@auth.<%= $fqdn %>',
+    focusUserJid: 'focus@auth.<%= $domain_name %>',
     useNicks: false,
     testing: {
         enableFirefoxSimulcast: false,
