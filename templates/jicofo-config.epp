@@ -3,7 +3,7 @@
 #
 
 # sets the host name of the XMPP server
-JICOFO_HOST=<%= $domain_name %>
+JICOFO_HOST=localhost
 
 # sets the XMPP domain (default: none)
 JICOFO_HOSTNAME=<%= $domain_name %>
