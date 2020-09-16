@@ -3,16 +3,16 @@
 class jitsimeet::config {
 
   file {
-    "/etc/jitsi/meet/${jitsimeet::fqdn}-config.js":
-      ensure  => present,
-      content => epp('jitsimeet/meet-config.epp', {
-        'fqdn'           => $jitsimeet::fqdn,
-        'custom_options' => $jitsimeet::meet_custom_options,
-        'domain_name'    => $jitsimeet::domain_name,
-      }),
-      owner   => 'root',
-      group   => 'jitsi',
-      mode    => '0644';
+#    "/etc/jitsi/meet/${jitsimeet::fqdn}-config.js":
+#      ensure  => present,
+#      content => epp('jitsimeet/meet-config.epp', {
+#        'fqdn'           => $jitsimeet::fqdn,
+#        'custom_options' => $jitsimeet::meet_custom_options,
+#        'domain_name'    => $jitsimeet::domain_name,
+#      }),
+#      owner   => 'root',
+#      group   => 'jitsi',
+#      mode    => '0644';
 
     '/etc/jitsi/jicofo/config':
       ensure  => present,
